@@ -33,10 +33,10 @@ app.post('/imagen', upload.single('imagen') ,async (req, res) => {
     //fs con foto reescalada
     fs.writeFileSync('rutaImagen/resized.jpg', resizedImagenBuffer);
 
+    const ImageBase64 = resizedImagenBuffer.toString('base64');
     console.log(resizedImagenBuffer);
 
-    res.send([{resizeImage : resizedImagenBuffer}]);
-})
+    res.send({'$conten-type' : 'image/jpg', '$content' : ImageBase64}); })
 
 const PORT = process.env.PORT || 3000;
 app.listen (PORT, () => {
